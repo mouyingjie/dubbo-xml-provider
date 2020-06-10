@@ -8,8 +8,9 @@
 
     <dubbo:application name="dubbo-xml-provider"/>
     <dubbo:registry address="zookeeper://127.0.0.1:2181" check="false"/>
-    <dubbo:protocol name="dubbo" port="29019"/>
+    <dubbo:protocol name="dubbo" port="29018"/>
 
     <dubbo:service interface="com.demo.dubbo.service.TestService" ref="testService"/>
-    <!--<bean id="testService" class="com.demo.dubbo.service.impl.TestServiceImpl"/>-->
+
+   <dubbo:annotation package="com.demo.dubbo.service" />
 </beans>
