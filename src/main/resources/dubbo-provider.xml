@@ -8,9 +8,27 @@
 
     <dubbo:application name="dubbo-xml-provider"/>
     <dubbo:registry address="zookeeper://127.0.0.1:2181" check="false"/>
-    <dubbo:protocol name="dubbo" port="29018"/>
+    <dubbo:protocol name="dubbo" port="29029"/>
 
     <dubbo:service interface="com.demo.dubbo.service.TestService" ref="testService"/>
 
    <dubbo:annotation package="com.demo.dubbo.service" />
+
+
+    <dubbo:service interface="com.demo.dubbo.service.AsyncService" ref="asyncService"/>
+    <dubbo:service interface="com.demo.dubbo.service.CacheService" ref="cacheService"/>
+    
+    <dubbo:service interface="com.demo.dubbo.service.callback.CallbackService" connections="1" callbacks="1000"
+                   ref="callbackService">
+        <dubbo:method name="addListener">
+            <dubbo:argument index="1" callback="true"/>
+        </dubbo:method>
+    </dubbo:service>
+
+
+    <bean id="mockService" class="com.demo.dubbo.service.mock.MockServiceImpl"/>
+    <bean id="stubService" class="com.demo.dubbo.service.stub.StubServiceImpl"/>
+    <dubbo:service interface="com.demo.dubbo.service.mock.MockService" ref="mockService"/>
+    <dubbo:service interface="com.demo.dubbo.service.stub.StubService" ref="stubService"/>
+
 </beans>
